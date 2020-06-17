@@ -43,6 +43,7 @@ echo -e "\e[1;36mset billson password: \n\e[0m"
 passwd billson
 sudo -u billson xdg-user-dirs-update
 
+echo 
 read -p $'\e[1;36mEdit sudo config? [Y\\n] \e[0m' ask_sudo
 ask_sudo=${ask_sudo:-y}
 if [[ $ask_sudo =~ ^[Yy]$ ]]
