@@ -1,4 +1,4 @@
-HOSTNAME= 
+HOSTNAME=PC
 BOOT_LOADER_NAME=ArchLinux
 EFI_mount_point=/efi
 
@@ -17,13 +17,12 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo $HOSTNAME > /etc/hostname
 echo -e "127.0.0.1 localhost\n::1       localhost\n127.0.1.1 ${HOSTNAME}.localdomain ${HOSTNAME}" > /etc/hosts
 
-pacman -S vim base-devel man-db grub efibootmgr --needed
+pacman -S vim base-devel man-db grub efibootmgr git sudo xdg-user-dirs --needed
 
 
 echo -e "set root password: \n"
 passwd
 
-pacman -S sudo xdg-user-dirs
 echo -e "create billson user: \n"
 useradd billson -m -G wheel
 echo -e "set billson password: \n"
