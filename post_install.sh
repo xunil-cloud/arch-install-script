@@ -31,7 +31,7 @@ passwd billson
 sudo -u billson xdg-user-dirs-update
 EDITOR=vim visudo
 
-if [ ${install_networkmanager} ]; then
+if [ ${install_networkmanager} == true ]; then
 	pacman -S networkmanager
     systemctl enable NetworkManager
 else
