@@ -34,7 +34,7 @@ echo -e "\e[1;36m\n------ install other essential packages  ------\n\e[0m"
 pacman -S ${other_essential_packages} --needed
 
 echo -e "\e[1;36m\n------ user account setup ------\n\e[0m"
-echo -e "\e[1;36mset root password: \n"
+echo -e "\e[1;36mset root password: \n\e[0m"
 passwd
 
 echo -e "\e[1;36m\ncreate billson user...\n\e[0m"
@@ -43,7 +43,7 @@ echo -e "\e[1;36mset billson password: \n\e[0m"
 passwd billson
 sudo -u billson xdg-user-dirs-update
 
-read -p $'\e[1;36mEdit sudo config? [Y\n] \e[0m' -n 1 ask_sudo
+read -p $'\e[1;36mEdit sudo config? [Y\\n] \e[0m' ask_sudo
 ask_sudo=${ask_sudo:-y}
 if [[ $ask_sudo =~ ^[Yy]$ ]]
 then
