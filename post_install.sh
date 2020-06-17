@@ -9,7 +9,7 @@ wifi=false
 
 other_essential_packages="vim base-devel man-db grub efibootmgr git sudo xdg-user-dirs"
 
-echo -e "\e[1;36m\n##### basic system configuration: system time, locale, hostname  #####\n\e[0m"
+echo -e "\e[1;36m\n------ basic system configuration: system time, locale, hostname  ------\n\e[0m"
 
 ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 hwclock --systohc
@@ -29,21 +29,21 @@ else
 	other_essential_packages="${other_essential_packages} dhcpcd"
 fi
 
-echo -e "\e[1;36m\n##### install other essential packages  #####\n\e[0m"
+echo -e "\e[1;36m\n------ install other essential packages  ------\n\e[0m"
 
-pacman -S ${other_essential_packages}
+pacman -S ${other_essential_packages} --needed
 
-echo -e "\e[1;36m\n##### user account setup #####\n\e[0m"
-echo -e "set root password: \n"
+echo -e "\e[1;36m\n------ user account setup ------\n\e[0m"
+echo -e "\e[1;36mset root password: \n"
 passwd
 
-echo -e "create billson user...\n"
+echo -e "\e[1;36m\ncreate billson user...\n\e[0m"
 useradd billson -m -G wheel
-echo -e "set billson password: \n"
+echo -e "\e[1;36mset billson password: \n\e[0m"
 passwd billson
 sudo -u billson xdg-user-dirs-update
 
-read -p "Edit sudo config? [Y\n] " -n 1 ask_sudo
+read -p "\e[1;36mEdit sudo config? [Y\n] \e[0m" -n 1 ask_sudo
 ask_sudo=${ask_sudo:-y}
 if [[ $ask_sudo =~ ^[Yy]$ ]]
 then
@@ -56,7 +56,7 @@ else
     systemctl enable dhcpcd > /dev/null
 fi
 
-echo -e "\e[1;36m\n##### install grub #####\n\e[0m"
+echo -e "\e[1;36m\n------ install grub ------\n\e[0m"
 
 grub-install --target=x86_64-efi --efi-directory=${EFI_mount_point} --bootloader-id=${BOOT_LOADER_NAME}
 grub-mkconfig -o /boot/grub/grub.cfg
