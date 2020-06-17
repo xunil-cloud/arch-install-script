@@ -1,10 +1,10 @@
 #!/bin/sh
 
-EFI_partition = 
-EFI_mount_point = /efi
-ROOT_partition = 
-HOME_partition = 
-UEFI = true
+EFI_partition= 
+EFI_mount_point=/efi
+ROOT_partition= 
+HOME_partition= 
+UEFI=true
 
 timedatectl set-ntp true
 

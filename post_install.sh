@@ -1,9 +1,9 @@
-HOSTNAME = 
-BOOT_LOADER_NAME = ArchLinux
-EFI_mount_point = /efi
+HOSTNAME= 
+BOOT_LOADER_NAME=ArchLinux
+EFI_mount_point=/efi
 
-install_networkmanager = true
-wifi = false
+install_networkmanager=true
+wifi=false
 
 
 ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
