@@ -14,28 +14,35 @@ timedatectl set-ntp true
 # parted $DEVICE mkpart primary ext4 500MiB 15GiB
 # parted $DEVICE set 1 boot on
 
+echo -e "\e[1;36m\n##### hardrive setup #####\n\e[0m"
 
-echo MKFS
-mkfs.ext4 ${ROOT_partition}
-mkfs.ext4 ${HOME_partition}
+mkfs.ext4 ${ROOT_partition} > /dev/null
+mkfs.ext4 ${HOME_partition} > /dev/null
 
-echo MOUNT
 mount ${ROOT_partition} /mnt
-mkdir /mnt/home --verbose
-mkdir /mnt${EFI_mount_point} --verbose
+mkdir /mnt/home
+mkdir /mnt${EFI_mount_point}
 mount ${EFI_partition} /mnt/efi
 mount ${HOME_partition} /mnt/home
 
-echo MIRROR
-vim /etc/pacman.d/mirrorlist
+echo -e "\e[1;36m\n##### mirrorlist setup #####\n\e[0m"
+read -p "Edit mirrorlist config? [Y\n] " -n 1 ask_mirrorlist
+ask_mirrorlist=${ask_mirrorlist:-y}
+if [[ $ask_mirrorlist =~ ^[Yy]$ ]]
+then
+   vim /etc/pacman.d/mirrorlist 
+fi
 
-echo INSTALL
+echo -e "\e[1;36m\n##### install base system #####\n\e[0m"
+
 pacstrap /mnt base linux linux-firmware
 genfstab -U /mnt >> /mnt/etc/fstab
 
-echo CHROOT
+echo -e "\e[1;36m\n##### base system has been installed #####\n\e[0m"
+
 cp post_install.sh /mnt
 arch-chroot /mnt ./post_install.sh
-echo FINISH_CHROOT
-umount -R /mnt
 
+
+umount -R /mnt
+echo -e "\e[1;36m\n##### installation completed! #####\n\e[0m"
