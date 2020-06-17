@@ -34,7 +34,8 @@ pacstrap /mnt base linux linux-firmware
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo CHROOT
-arch-chroot /mnt post_install.sh
+cp post_install.sh /mnt
+arch-chroot /mnt ./post_install.sh
 echo FINISH_CHROOT
 umount -R /mnt
 

@@ -17,7 +17,7 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo $HOSTNAME > /etc/hostname
 echo -e "127.0.0.1 localhost\n::1       localhost\n127.0.1.1 ${HOSTNAME}.localdomain ${HOSTNAME}" > /etc/hosts
 
-pacman -S vim base-devel man-db grub efibootmgr
+pacman -S vim base-devel man-db grub efibootmgr --needed
 
 
 echo -e "set root password: \n"
@@ -33,7 +33,7 @@ EDITOR=vim visudo
 
 if [ ${install_networkmanager} ]; then
 	pacman -S networkmanager
-    systemctl enable networkmanager
+    systemctl enable NetworkManager
 else
 	pacman -S dhcpcd
     systemctl enable dhcpcd
