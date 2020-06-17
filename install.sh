@@ -19,10 +19,11 @@ echo -e "\e[1;36m\n------ hardrive setup ------\n\e[0m"
 mkfs.ext4 ${ROOT_partition} 
 mkfs.ext4 ${HOME_partition}
 
-read -p "\e[1;36mDo you want to format efi partion? [y\N] \e[0m" -n 1 ask_efi_format
+read -p $'\e[1;36mDo you want to format efi partion? [y\N] \e[0m' -n 1 ask_efi_format
 ask_efi_format=${ask_efi_format:-n}
 if [[ $ask_efi_format =~ ^[Yy]$ ]]
 then
+   echo
    mkfs.fat -F32 ${EFI_partition} 
 fi
 
@@ -35,7 +36,7 @@ mount ${HOME_partition} /mnt/home
 
 
 echo -e "\e[1;36m\n------ mirrorlist setup ------\n\e[0m"
-read -p "\e[1;36mEdit mirrorlist config? [Y\n] \e[0m" -n 1 ask_mirrorlist
+read -p '$\e[1;36mEdit mirrorlist config? [Y\n] \e[0m' -n 1 ask_mirrorlist
 ask_mirrorlist=${ask_mirrorlist:-y}
 if [[ $ask_mirrorlist =~ ^[Yy]$ ]]
 then
