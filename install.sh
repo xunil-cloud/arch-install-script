@@ -8,12 +8,6 @@ UEFI=true
 
 timedatectl set-ntp true
 
-# echo PARTED
-# parted $DEVICE mklabel msdos
-# parted $DEVICE mkpart primary ext4 1MiB 500MiB
-# parted $DEVICE mkpart primary ext4 500MiB 15GiB
-# parted $DEVICE set 1 boot on
-
 echo -e "\e[1;36m\n------ hardrive setup ------\n\e[0m"
 
 mkfs.ext4 ${ROOT_partition} 
@@ -50,8 +44,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 echo -e "\e[1;36m\n------ base system has been installed ------\n\e[0m"
 
-cp post_install.sh /mnt
-arch-chroot /mnt ./post_install.sh
+cp ../arch-install-script*/ -r /mnt
+arch-chroot /mnt arch-install-script/post_install.sh
 
 
 umount -R /mnt
